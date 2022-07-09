@@ -10,13 +10,15 @@ describe('Indecision Component', () => {
     test('should hacer match con el snapshot', () => { 
         expect(wrapper.html()).toMatchSnapshot();
     });
-    test('No debe de disparar nada al escribir en el input', () => { 
+    test('No debe de disparar nada al escribir en el input', async() => { 
         const input = wrapper.find('input');
-        input.setValue('Hola Mundo');
+        const getAnswer = jest.spyOn(wrapper.vm, 'getAnser');
+        await input.setValue('Hola Mundo');
         expect(clgSpy).toHaveBeenCalledTimes(1);
+        expect( getAnswer ).not.toHaveBeenCalled();
     });
     test('"?" se debe disparar el fetch', () => { 
-
+        
     });
     test('Pruebas en el getAnswer', () => {
 
@@ -26,4 +28,3 @@ describe('Indecision Component', () => {
     });
 
  })
-
